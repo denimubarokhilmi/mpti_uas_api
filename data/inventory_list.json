@@ -1,0 +1,40 @@
+{
+    "room" :[
+         {
+      "id_room": "RG001",
+      "nama_ruangan": "Ruang Kelas A1",
+      "jenis_ruangan": "Ruang Kelas",
+      "lokasi": "Gedung A Lantai 1",
+      "status": "tersedia"
+    },
+    {
+      "id_room": "RG002",
+      "nama_ruangan": "Laboratorium Komputer",
+      "jenis_ruangan": "Laboratorium",
+      "lokasi": "Gedung B Lantai 2",
+      "status": "dipinjam"
+    }
+    ],
+    "facility":[
+        {
+      "id_facility": "FS001",
+      "nama_fasilitas": "Proyektor Epson",
+      "kategori": "Elektronik",
+      "lokasi": "Gudang Fasilitas",
+      "jumlah_total": 10,
+      "jumlah_tersedia": 7,
+      "kondisi": "baik",
+      "status": "tersedia"
+    },
+    {
+      "id_facility": "FS002",
+      "nama_fasilitas": "Kursi Lipat",
+      "kategori": "Perabot",
+      "lokasi": "Gudang Aula",
+      "jumlah_total": 100,
+      "jumlah_tersedia": 80,
+      "kondisi": "baik",
+      "status": "tersedia"
+    }
+    ]
+}

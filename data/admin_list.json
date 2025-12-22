@@ -1,0 +1,19 @@
+{
+  "id_admin": "ADM001",
+  "nama": "Admin Utama",
+  "username": "admin",
+  "password": "admin123",
+  "role": "admin",
+  "kontak": {
+    "email": "admin@kampus.ac.id",
+    "no_hp": "081234567890"
+  },
+  "hak_akses": [
+    "kelola_user",
+    "kelola_fasilitas",
+    "lihat_laporan",
+    "verifikasi_peminjaman"
+  ],
+  "status": "aktif",
+  "created_at": "2025-01-01"
+}
