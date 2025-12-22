@@ -1,9 +1,11 @@
 {
-  "id_officer": "PTG001",
+  "officer":[
+    {
+      "id_officer": "PTG001",
   "nama": "Siti Aminah",
   "username": "petugas1",
   "password": "petugas123",
-  "role": "petugas",
+  "role": "officer",
   "kontak": {
     "email": "petugas@kampus.ac.id",
     "no_hp": "083456789012"
@@ -14,4 +16,7 @@
     "cek_kondisi_fasilitas"
   ],
   "status": "aktif"
+    }
+  ]
+  
 }
