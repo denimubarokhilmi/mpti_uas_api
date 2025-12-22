@@ -1,9 +1,11 @@
 {
-  "id_user": "USR001",
+  "user":[
+    {
+ "id_user": "USR001",
   "nama": "Budi Santoso",
   "username": "budi",
   "password": "budi123",
-  "role": "pengguna",
+  "role": "user",
     "nim": "220101010",
     "prodi": "Teknik Informatika",
   "kontak": {
@@ -21,4 +23,7 @@
       "status": "borrowed"
     }
   ]
+    }
+  ]
+ 
 }
