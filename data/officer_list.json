@@ -1,22 +1,17 @@
 {
-  "officer":[
+  "officer": [
     {
       "id_officer": "PTG001",
-  "nama": "Siti Aminah",
-  "username": "petugas1",
-  "password": "petugas123",
-  "role": "officer",
-  "kontak": {
-    "email": "petugas@kampus.ac.id",
-    "no_hp": "083456789012"
-  },
-  "tugas": [
-    "verifikasi_peminjaman",
-    "serah_terima_fasilitas",
-    "cek_kondisi_fasilitas"
-  ],
-  "status": "aktif"
+      "name": "Siti Aminah",
+      "username": "petugas1",
+      "password": "$2b$10$0gaPjr5OjsX1i2Lfbli9pu8YYL9jvVqEuyHyNcli3MFqyBYZ1phKi",
+      "role": "officer",
+      "nim": 2344091,
+      "contact": {
+        "email": "petugas@kampus.ac.id",
+        "phone_number": "083456789012"
+      },
+      "status": "aktif"
     }
   ]
-  
 }

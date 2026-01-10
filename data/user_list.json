@@ -1,29 +1,18 @@
 {
-  "user":[
+  "user": [
     {
- "id_user": "USR001",
-  "nama": "Budi Santoso",
-  "username": "budi",
-  "password": "budi123",
-  "role": "user",
-    "nim": "220101010",
-    "prodi": "Teknik Informatika",
-  "kontak": {
-    "email": "budi@kampus.ac.id",
-    "no_hp": "082345678901"
-  },
-  "status": "aktif",
-  "riwayat_peminjaman": [
-    {
-      "id_peminjaman": "PMJ001",
-      "id_iventory": "1",
-      "name_inventory": "Proyektor Epson",
-      "tanggal_pinjam": "2025-12-22T08:09:06.370Z",
-      "tanggal_kedaluarsa": "2025-01-11",
-      "status": "borrowed"
+      "id_user": "USR001",
+      "name": "Budi Santoso",
+      "username": "budi",
+      "password": "$2b$10$hWQ3aDwfkfhO6JcAvcYYV.XLpM3t1vuAOVeOkJ48Ra6fubxDjWh9O",
+      "role": "user",
+      "nim": 220101010,
+      "study_program": "Teknik Informatika",
+      "contact": {
+        "email": "budi@kampus.ac.id",
+        "phone_number": "082345678901"
+      },
+      "status": "aktif"
     }
   ]
-    }
-  ]
- 
 }
