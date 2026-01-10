@@ -1,0 +1,37 @@
+{
+  "borrowed_list": [
+    {
+      "user_id": "USR001",
+      "items_id": "FS001",
+      "start_date": "2025-12-06",
+      "end_date": "2025-12-07",
+      "start_time": "08:00",
+      "quantity": 2,
+      "end_time": "09:00",
+      "item": {
+        "id_facility": "FS001",
+        "facility_name": "Proyektor Epson",
+        "category": "Elektronik",
+        "location": "Gudang Fasilitas",
+        "quantity_available": 10,
+        "condition": "baik",
+        "status": { "available": true, "pending": true, "approved": false }
+      }
+    },
+    {
+      "user_id": "USR001",
+      "items_id": "RG001",
+      "start_date": "2025-12-06",
+      "end_date": "2025-12-07",
+      "start_time": "08:00",
+      "end_time": "09:00",
+      "item": {
+        "id_room": "RG001",
+        "room_name": "Ruang Kelas A1",
+        "room_type": "Ruang Kelas",
+        "location": "Gedung A Lantai 1",
+        "status": { "available": true, "pending": true, "approved": false }
+      }
+    }
+  ]
+}
