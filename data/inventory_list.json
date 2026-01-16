@@ -1,46 +1,57 @@
 {
   "room": [
     {
-      "id_room": "RG001",
-      "room_name": "Ruang Kelas A1",
-      "room_type": "Ruang Kelas",
-      "location": "Gedung A Lantai 1",
-      "status": {
-        "available": true
-      }
-    },
-    {
       "id_room": "RG002",
-      "room_name": "Laboratorium Komputer",
+      "name": "Laboratorium Komputer",
+      "type": "room",
+      "desc": "KAPASITAS 40 ORANG, AC AKTIF",
       "room_type": "Laboratorium",
       "location": "Gedung B Lantai 2",
+      "quantity_available": 1,
       "status": {
         "available": true
-      }
+      },
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800"
+    },
+    {
+      "id_room": "RG003",
+      "status": {
+        "available": false,
+        "pending": true,
+        "approved": false
+      },
+      "image": "1768491292788-129470656.jpeg",
+      "type": "room",
+      "name": "test",
+      "quantity_available": "1",
+      "desc": "dasd"
+    },
+    {
+      "id_room": "RG004",
+      "status": {
+        "available": true
+      },
+      "image": "1768491910577-665115506.png",
+      "type": "room",
+      "name": "das",
+      "quantity_available": "1",
+      "desc": "sda"
     }
   ],
   "facility": [
     {
       "id_facility": "FS001",
-      "facility_name": "Proyektor Epson",
+      "name": "Proyektor Epson",
       "category": "Elektronik",
+      "type": "facility",
+      "desc": "TIDAK BISA DIPINJAM UNTUK ACARA LUAR KAMPUS",
       "location": "Gudang Fasilitas",
-      "quantity_available": 10,
+      "quantity_available": 38,
       "condition": "baik",
       "status": {
         "available": true
-      }
-    },
-    {
-      "id_facility": "FS002",
-      "facility_name": "Kursi Lipat",
-      "category": "Perabot",
-      "location": "Gudang Aula",
-      "quantity_available": 100,
-      "condition": "baik",
-      "status": {
-        "available": true
-      }
+      },
+      "image": "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=800"
     }
   ]
 }

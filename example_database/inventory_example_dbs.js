@@ -89,6 +89,7 @@ class Inventory {
     await this.#writeInventory(inventory);
     await this.#writeBorrowed(borrowed);
     await this.updateFacilityStatusByQuantity();
+    return;
   }
 
   async find_inventory() {

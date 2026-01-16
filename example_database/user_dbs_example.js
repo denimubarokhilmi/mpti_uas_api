@@ -26,6 +26,16 @@ class User {
     }
   }
 
+  async get_find_user() {
+    try {
+      const read = await this.#read_user_data();
+      return read.user;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
   async find_user(username) {
     try {
       const read = await this.#read_user_data();
@@ -54,6 +64,14 @@ class User {
       throw error;
     }
   }
+  async get_borrowed_items() {
+    try {
+      const file = await fs.readFile(path_file_borrowing, "utf8");
+      return JSON.parse(file);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async borrowing_items(req, payload) {
     try {
@@ -61,15 +79,15 @@ class User {
       const items_id = payload.items_id;
 
       const inventory = await this.#read_inventory_list();
-      const borrowed_inventory = JSON.parse(
-        await fs.readFile(path_file_borrowing, "utf8")
-      );
+      const result_file = await fs.readFile(path_file_borrowing, "utf8");
+      const borrowed_inventory = JSON.parse(result_file);
 
       const found_room = await this.find_room(inventory, items_id);
       const found_facility = await this.find_facility(inventory, items_id);
 
       if (found_room) {
         found_room.status.pending = true;
+        found_room.status.available = false;
         found_room.status.approved = false;
         const data_payload = {
           user_id,
@@ -78,10 +96,15 @@ class User {
             ...found_room,
           },
         };
+
         borrowed_inventory.borrowed_list.push(data_payload);
         await fs.writeFile(
           path_file_borrowing,
           JSON.stringify(borrowed_inventory, null, 2)
+        );
+        await fs.writeFile(
+          path_file_inventory,
+          JSON.stringify(inventory, null, 2)
         );
         return {
           message: `borrower with id ${items_id} successful`,
@@ -107,6 +130,7 @@ class User {
           path_file_borrowing,
           JSON.stringify(borrowed_inventory, null, 2)
         );
+
         return {
           message: `borrower with id ${items_id} successful`,
         };
@@ -145,6 +169,9 @@ class User {
       const borrowed_inventory = JSON.parse(
         await fs.readFile(path_file_borrowing, "utf8")
       );
+      const inventory = await this.#read_inventory_list();
+      const found_room = await this.find_room(inventory, items_id);
+
       const found_room_index = await this.find_index_room_borrowed(
         borrowed_inventory,
         items_id
@@ -155,10 +182,15 @@ class User {
       );
       if (found_room_index >= 0) {
         borrowed_inventory.borrowed_list.splice(found_room_index, 1);
+        found_room.status.available = true;
 
         await fs.writeFile(
           path_file_borrowing,
           JSON.stringify(borrowed_inventory, null, 2)
+        );
+        await fs.writeFile(
+          path_file_inventory,
+          JSON.stringify(inventory, null, 2)
         );
         return {
           message: `Cancel loan with ID ${items_id} successful`,

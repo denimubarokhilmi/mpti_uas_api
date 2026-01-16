@@ -2,15 +2,20 @@
   "admin": [
     {
       "id_admin": "ADM001",
-      "name": "Admin Utama",
+      "name": "Admin Utamass",
       "username": "admin",
-      "password": "$2b$10$dpC6wEs2Gd.A06lMCXCB.OxwetORnZzQxxryfeJj/UQrF2uNUEDNi",
+      "nim": "1234555566",
+      "password": "$2b$10$5U6m6HqKI7QnBgyd1a/Y7.nFTpj6aLZOL78US3an1fPrTzgIWbhzu",
       "role": "admin",
-      "contact": {
-        "email": "admin@kampus.ac.id",
-        "phone_number": "081234567890"
-      },
-      "status": "aktif"
+      "place": "Jakarta",
+      "date": "2002-05-10",
+      "gender": "Perempuan",
+      "religion": "islam",
+      "email": "stmik@kampus.ac.id",
+      "phone_number": "082345678901",
+      "address": "Jl. Merdeka No. 1",
+      "status": "aktif",
+      "date_of_entry": "2020"
     }
   ]
 }

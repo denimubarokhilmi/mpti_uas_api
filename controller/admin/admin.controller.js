@@ -45,7 +45,7 @@ const create_user_controller = async (req, res) => {
 
 const update_user_controller = async (req, res) => {
   try {
-    const result = await adminService.update_user_service(req.body);
+    const result = await adminService.update_user_service(req, req.body);
     return res.status(200).json({
       result,
     });
@@ -98,7 +98,7 @@ const create_officer_controller = async (req, res) => {
 };
 const update_officer_controller = async (req, res) => {
   try {
-    const result = await adminService.update_officer_service(req.body);
+    const result = await adminService.update_officer_service(req, req.body);
     return res.status(200).json({
       result,
     });
@@ -137,7 +137,12 @@ const get_room_controller = async (req, res) => {
 };
 const create_room_controller = async (req, res) => {
   try {
-    const result = await adminService.create_room_service(req.body);
+    const image = req.files.image?.[0]?.filename || null;
+    const payload = {
+      image,
+      ...req.body,
+    };
+    const result = await adminService.create_room_service(payload);
     return res.status(200).json({
       result,
     });
@@ -149,7 +154,12 @@ const create_room_controller = async (req, res) => {
 };
 const update_room_controller = async (req, res) => {
   try {
-    const result = await adminService.update_room_service(req.body);
+    const image = req.files.image?.[0]?.filename || null;
+    const payload = {
+      image,
+      ...req.body,
+    };
+    const result = await adminService.update_room_service(payload);
     return res.status(200).json({
       result,
     });
@@ -190,7 +200,12 @@ const get_facility_controller = async (req, res) => {
 
 const create_facility_controller = async (req, res) => {
   try {
-    const result = await adminService.create_facility_service(req.body);
+    const image = req.files.image?.[0]?.filename || null;
+    const payload = {
+      image,
+      ...req.body,
+    };
+    const result = await adminService.create_facility_service(payload);
     return res.status(200).json({
       result,
     });
@@ -203,7 +218,12 @@ const create_facility_controller = async (req, res) => {
 
 const update_facility_controller = async (req, res) => {
   try {
-    const result = await adminService.update_facility_service(req.body);
+    const image = req.files.image?.[0]?.filename || null;
+    const payload = {
+      image,
+      ...req.body,
+    };
+    const result = await adminService.update_facility_service(payload);
     return res.status(200).json({
       result,
     });

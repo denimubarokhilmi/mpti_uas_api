@@ -3,34 +3,50 @@
     {
       "user_id": "USR001",
       "items_id": "FS001",
-      "start_date": "2025-12-06",
-      "end_date": "2025-12-07",
-      "start_time": "08:00",
-      "quantity": 2,
-      "end_time": "09:00",
+      "start_date": "2026-01-17",
+      "end_date": "2026-01-17",
+      "start_time": "03:31",
+      "quantity": 4,
+      "end_time": "09:31",
+      "alasan": "testing",
       "item": {
         "id_facility": "FS001",
-        "facility_name": "Proyektor Epson",
+        "name": "Proyektor Epson",
         "category": "Elektronik",
+        "type": "facility",
+        "desc": "TIDAK BISA DIPINJAM UNTUK ACARA LUAR KAMPUS",
         "location": "Gudang Fasilitas",
-        "quantity_available": 10,
+        "quantity_available": 38,
         "condition": "baik",
-        "status": { "available": true, "pending": true, "approved": false }
+        "status": {
+          "available": true,
+          "pending": true,
+          "approved": false
+        },
+        "image": "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=800"
       }
     },
     {
       "user_id": "USR001",
-      "items_id": "RG001",
-      "start_date": "2025-12-06",
-      "end_date": "2025-12-07",
-      "start_time": "08:00",
-      "end_time": "09:00",
+      "items_id": "RG003",
+      "start_date": "2026-01-17",
+      "end_date": "2026-01-19",
+      "start_time": "03:50",
+      "quantity": 0,
+      "end_time": "03:50",
+      "alasan": "misal\n",
       "item": {
-        "id_room": "RG001",
-        "room_name": "Ruang Kelas A1",
-        "room_type": "Ruang Kelas",
-        "location": "Gedung A Lantai 1",
-        "status": { "available": true, "pending": true, "approved": false }
+        "id_room": "RG003",
+        "status": {
+          "available": false,
+          "pending": true,
+          "approved": false
+        },
+        "image": "1768491292788-129470656.jpeg",
+        "type": "room",
+        "name": "test",
+        "quantity_available": "1",
+        "desc": "dasd"
       }
     }
   ]

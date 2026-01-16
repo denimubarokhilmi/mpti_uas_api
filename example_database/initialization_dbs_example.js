@@ -41,7 +41,7 @@ class Database_Example {
     try {
       const token = jwt.sign(
         {
-          email: payload.contact.email,
+          email: payload.email,
           username: payload.username,
           id: payload.id_user
             ? payload.id_user
@@ -79,6 +79,8 @@ class Database_Example {
           return {
             message: "login successfully",
             token,
+            role: "user",
+            name: user_data.name,
           };
         }
       }
@@ -89,6 +91,8 @@ class Database_Example {
           return {
             message: "login successfully",
             token,
+            role: "officer",
+            name: officer_data.name,
           };
         }
       }
@@ -99,10 +103,31 @@ class Database_Example {
           return {
             message: "login successfully",
             token,
+            role: "admin",
+            name: admin_data.name,
           };
         }
       }
       throw new Error("Invalid user or password");
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async find_inventorys() {
+    try {
+      const inventory = await this.inventory.find_inventory();
+      return inventory;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async find_user_and_officer() {
+    try {
+      const user = await this.user.get_find_user();
+      const officer = await this.officer.get_find_officer();
+      return { user, officer };
     } catch (error) {
       throw error;
     }
