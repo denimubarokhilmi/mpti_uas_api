@@ -25,6 +25,15 @@ class Officer {
     }
   }
 
+  async get_find_officer() {
+    try {
+      const read = await this.#read_officer_data();
+      return read.officer;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async find_officer(username) {
     try {
       const read = await this.#read_officer_data();
@@ -153,6 +162,9 @@ class Officer {
     try {
       const user_id = req.user.id;
       const items_id = payload.items_id;
+      const inventory = await this.#read_inventory_list();
+      const found_room = await this.find_room(inventory, items_id);
+
       const borrowed_inventory = JSON.parse(
         await fs.readFile(path_file_borrowing, "utf8")
       );
@@ -166,6 +178,11 @@ class Officer {
       );
 
       if (found_room_index >= 0) {
+        found_room.status.available = true;
+        await fs.writeFile(
+          path_file_inventory,
+          JSON.stringify(inventory, null, 2)
+        );
         borrowed_inventory.borrowed_list[
           found_room_index
         ].item.status.rejected = true;

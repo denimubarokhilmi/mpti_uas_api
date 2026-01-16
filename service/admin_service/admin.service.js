@@ -25,9 +25,9 @@ const create_user_service = async (payload) => {
   }
 };
 
-const update_user_service = async (payload) => {
+const update_user_service = async (req, payload) => {
   try {
-    const result = await dbs_example.admin.updateUser(payload);
+    const result = await dbs_example.admin.updateUser(req, payload);
     return result;
   } catch (error) {
     throw error.message;
@@ -59,9 +59,9 @@ const create_officer_service = async (payload) => {
   }
 };
 
-const update_officer_service = async (payload) => {
+const update_officer_service = async (req, payload) => {
   try {
-    return await dbs_example.admin.updateOfficer(payload);
+    return await dbs_example.admin.updateOfficer(req, payload);
   } catch (error) {
     throw error.message;
   }
