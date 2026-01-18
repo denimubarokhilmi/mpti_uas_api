@@ -2,16 +2,16 @@
   "room": [
     {
       "id_room": "RG002",
-      "name": "Laboratorium Komputer",
+      "name": "Laboratorium Komputers",
       "type": "room",
       "desc": "KAPASITAS 40 ORANG, AC AKTIF",
       "room_type": "Laboratorium",
       "location": "Gedung B Lantai 2",
-      "quantity_available": 1,
+      "quantity_available": "1",
       "status": {
         "available": true
       },
-      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800"
+      "image": "1768684075625-914486048.jpg"
     },
     {
       "id_room": "RG003",
@@ -25,17 +25,6 @@
       "name": "test",
       "quantity_available": "1",
       "desc": "dasd"
-    },
-    {
-      "id_room": "RG004",
-      "status": {
-        "available": true
-      },
-      "image": "1768491910577-665115506.png",
-      "type": "room",
-      "name": "das",
-      "quantity_available": "1",
-      "desc": "sda"
     }
   ],
   "facility": [
@@ -46,12 +35,23 @@
       "type": "facility",
       "desc": "TIDAK BISA DIPINJAM UNTUK ACARA LUAR KAMPUS",
       "location": "Gudang Fasilitas",
-      "quantity_available": 38,
+      "quantity_available": "40",
       "condition": "baik",
       "status": {
         "available": true
       },
-      "image": "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=800"
+      "image": "1768725852541-982167575.png"
+    },
+    {
+      "id_facility": "FS002",
+      "status": {
+        "available": true
+      },
+      "image": "1768722999950-422960819.jpg",
+      "name": "kasurr",
+      "quantity_available": "30",
+      "desc": "kasur empuk nyaman",
+      "type": "facility"
     }
   ]
 }

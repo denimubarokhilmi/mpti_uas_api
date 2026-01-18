@@ -1,14 +1,15 @@
 {
   "borrowed_list": [
     {
+      "borrowed_id": "BD001",
       "user_id": "USR001",
       "items_id": "FS001",
       "start_date": "2026-01-17",
-      "end_date": "2026-01-17",
-      "start_time": "03:31",
-      "quantity": 4,
-      "end_time": "09:31",
-      "alasan": "testing",
+      "end_date": "2026-01-19",
+      "start_time": "22:24",
+      "quantity": 2,
+      "end_time": "22:25",
+      "alasan": "test fasilitas",
       "item": {
         "id_facility": "FS001",
         "name": "Proyektor Epson",
@@ -16,31 +17,32 @@
         "type": "facility",
         "desc": "TIDAK BISA DIPINJAM UNTUK ACARA LUAR KAMPUS",
         "location": "Gudang Fasilitas",
-        "quantity_available": 38,
+        "quantity_available": 42,
         "condition": "baik",
         "status": {
           "available": true,
-          "pending": true,
-          "approved": false
+          "pending": false,
+          "approved": true
         },
         "image": "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=800"
       }
     },
     {
+      "borrowed_id": "BD002",
       "user_id": "USR001",
       "items_id": "RG003",
       "start_date": "2026-01-17",
       "end_date": "2026-01-19",
-      "start_time": "03:50",
+      "start_time": "22:26",
       "quantity": 0,
-      "end_time": "03:50",
-      "alasan": "misal\n",
+      "end_time": "22:26",
+      "alasan": "test ruangan",
       "item": {
         "id_room": "RG003",
         "status": {
           "available": false,
-          "pending": true,
-          "approved": false
+          "pending": false,
+          "approved": true
         },
         "image": "1768491292788-129470656.jpeg",
         "type": "room",

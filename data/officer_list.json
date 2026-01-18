@@ -3,8 +3,8 @@
     {
       "id_officer": "PTG001",
       "name": "Siti Aminah",
-      "username": "petugas1",
-      "password": "$2b$10$0gaPjr5OjsX1i2Lfbli9pu8YYL9jvVqEuyHyNcli3MFqyBYZ1phKi",
+      "username": "siti",
+      "password": "$2b$10$v4IOWqHwKYkMiN/Lfo2Cveez34sF3bhWjjV/meRXm/HMwOJwvCiZa",
       "role": "officer",
       "nim": 2344091,
       "place": "Jakarta",
@@ -25,13 +25,15 @@
       "nim": 2344002,
       "place": "Bandung",
       "date": "1995-03-12",
-      "gender": "male",
+      "gender": "Laki-Laki",
       "religion": "islam",
       "email": "ahmad@kampus.ac.id",
       "phone_number": "082345678902",
       "address": "Jl. Dago No. 10",
       "status": "aktif",
-      "date_of_entry": "2019"
+      "date_of_entry": "2019",
+      "password": "$2b$10$2tS8quFQWGZZwFg9GW3c7eqb9EJSzdzJgtoM/ZBIf6iF3dPiasAsu",
+      "NIM": 2344002
     },
     {
       "id_officer": "PTG003",

@@ -4,7 +4,7 @@ const admin_update_password_controller = async (req, res) => {
   try {
     const result = await adminService.admin_update_password_service(
       req,
-      req.body
+      req.body,
     );
     return res.status(200).json({
       result,
@@ -164,6 +164,7 @@ const update_room_controller = async (req, res) => {
       result,
     });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       error,
     });
@@ -228,6 +229,7 @@ const update_facility_controller = async (req, res) => {
       result,
     });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       error,
     });
