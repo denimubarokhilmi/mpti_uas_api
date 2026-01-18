@@ -18,7 +18,7 @@ router.use(authMiddleware);
 router.get("/inventory", inventoryController.get_inventory_controller);
 router.get(
   "/users_and_officer",
-  officer_and_userController.get_officer_and_user_controller
+  officer_and_userController.get_officer_and_user_controller,
 );
 
 // user routes
@@ -42,12 +42,25 @@ router.get("/users", async (req, res) => {
 // officer routes
 router.put(
   "/officer/borrowed_items_receive",
-  officerController.officer_borrowed_items_controller_receive
+  officerController.officer_borrowed_items_controller_receive,
 );
 router.put(
   "/officer/borrowed_items_rejected",
-  officerController.officer_borrowed_items_controller_rejected
+  officerController.officer_borrowed_items_controller_rejected,
 );
+
+router.get("/officers", async (req, res) => {
+  try {
+    const result = await await dbs_example.officer.find_officer(
+      req.user.username,
+    );
+    return res.status(200).json({ result });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
+});
 
 //admin routes
 router.put("/admin/profile", adminController.admin_update_password_controller);
@@ -85,11 +98,11 @@ router
   .get(adminController.get_room_controller)
   .post(
     upload.fields([{ name: "image", maxCount: 1 }]),
-    adminController.create_room_controller
+    adminController.create_room_controller,
   )
   .put(
     upload.fields([{ name: "image", maxCount: 1 }]),
-    adminController.update_room_controller
+    adminController.update_room_controller,
   )
   .delete(adminController.delete_room_controller);
 
@@ -99,11 +112,11 @@ router
   .get(adminController.get_facility_controller)
   .post(
     upload.fields([{ name: "image", maxCount: 1 }]),
-    adminController.create_facility_controller
+    adminController.create_facility_controller,
   )
   .put(
     upload.fields([{ name: "image", maxCount: 1 }]),
-    adminController.update_facility_controller
+    adminController.update_facility_controller,
   )
   .delete(adminController.delete_facility_controller);
 

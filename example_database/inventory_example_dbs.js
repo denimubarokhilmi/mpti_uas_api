@@ -52,6 +52,10 @@ class Inventory {
     const activeBorrowedList = [];
 
     for (const booking of borrowed.borrowed_list) {
+      if (booking.item.status.rejected) {
+        activeBorrowedList.push(booking);
+        continue;
+      }
       const isExpired =
         booking.end_date &&
         booking.end_time &&
@@ -60,7 +64,7 @@ class Inventory {
       if (isExpired) {
         if (booking.item?.id_room) {
           const room = inventory.room.find(
-            (r) => r.id_room === booking.item.id_room
+            (r) => r.id_room === booking.item.id_room,
           );
 
           if (room) {
@@ -70,7 +74,7 @@ class Inventory {
 
         if (booking.item?.id_facility) {
           const facility = inventory.facility.find(
-            (f) => f.id_facility === booking.item.id_facility
+            (f) => f.id_facility === booking.item.id_facility,
           );
 
           if (facility) {

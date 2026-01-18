@@ -38,7 +38,7 @@ class Officer {
     try {
       const read = await this.#read_officer_data();
       const found = read.officer.find(
-        (item) => item.username == username || item.nim == username
+        (item) => item.username == username || item.nim == username,
       );
       return found;
     } catch (error) {
@@ -65,7 +65,7 @@ class Officer {
   async find_index_room_borrowed(list, items_id) {
     try {
       return list.borrowed_list.findIndex(
-        (items) => items.item.id_room == items_id
+        (items) => items.borrowed_id == items_id,
       );
     } catch (error) {
       throw error;
@@ -74,7 +74,7 @@ class Officer {
   async find_index_facilities_borrowed(list, items_id) {
     try {
       return list.borrowed_list.findIndex(
-        (items) => items.item.id_facility == items_id
+        (items) => items.borrowed_id == items_id,
       );
     } catch (error) {
       throw error;
@@ -85,41 +85,37 @@ class Officer {
     try {
       const user_id = req.user.id;
       const items_id = payload.items_id;
+      const borrowed_id = payload.borrowed_id;
+      const type = payload.type;
 
       const inventory = await this.#read_inventory_list();
       const borrowed_inventory = JSON.parse(
-        await fs.readFile(path_file_borrowing, "utf8")
+        await fs.readFile(path_file_borrowing, "utf8"),
       );
 
       const found_room = await this.find_room(inventory, items_id);
       const found_facility = await this.find_facility(inventory, items_id);
-      const found_room_index = await this.find_index_room_borrowed(
+      const found_index = await this.find_index_room_borrowed(
         borrowed_inventory,
-        items_id
-      );
-      const found_facility_index = await this.find_index_facilities_borrowed(
-        borrowed_inventory,
-        items_id
+        borrowed_id,
       );
 
-      if (found_room) {
+      if (found_room && type == "room") {
         found_room.status.available = false;
         await fs.writeFile(
           path_file_inventory,
-          JSON.stringify(inventory, null, 2)
+          JSON.stringify(inventory, null, 2),
         );
 
-        borrowed_inventory.borrowed_list[
-          found_room_index
-        ].item.status.approved = true;
+        borrowed_inventory.borrowed_list[found_index].item.status.approved =
+          true;
 
-        borrowed_inventory.borrowed_list[
-          found_room_index
-        ].item.status.pending = false;
-
+        borrowed_inventory.borrowed_list[found_index].item.status.pending =
+          false;
+        Object.assign(borrowed_inventory.borrowed_list[found_index], payload);
         await fs.writeFile(
           path_file_borrowing,
-          JSON.stringify(borrowed_inventory, null, 2)
+          JSON.stringify(borrowed_inventory, null, 2),
         );
         return {
           message: `borrower with id ${items_id} successful`,
@@ -128,24 +124,24 @@ class Officer {
 
       if (found_facility) {
         found_facility.quantity_available -=
-          borrowed_inventory.borrowed_list[found_facility_index].quantity;
+          borrowed_inventory.borrowed_list[found_index].quantity;
 
         await fs.writeFile(
           path_file_inventory,
-          JSON.stringify(inventory, null, 2)
+          JSON.stringify(inventory, null, 2),
         );
 
-        borrowed_inventory.borrowed_list[
-          found_facility_index
-        ].item.status.approved = true;
+        borrowed_inventory.borrowed_list[found_index].item.status.approved =
+          true;
 
-        borrowed_inventory.borrowed_list[
-          found_facility_index
-        ].item.status.pending = false;
+        borrowed_inventory.borrowed_list[found_index].item.status.pending =
+          false;
+        Object.assign(borrowed_inventory.borrowed_list[found_index], payload);
+        console.log(borrowed_inventory.borrowed_list);
 
         await fs.writeFile(
           path_file_borrowing,
-          JSON.stringify(borrowed_inventory, null, 2)
+          JSON.stringify(borrowed_inventory, null, 2),
         );
         return {
           message: `borrower with id ${items_id} successful`,
@@ -162,62 +158,58 @@ class Officer {
     try {
       const user_id = req.user.id;
       const items_id = payload.items_id;
+      const borrowed_id = payload.borrowed_id;
+      const type = payload.type;
       const inventory = await this.#read_inventory_list();
       const found_room = await this.find_room(inventory, items_id);
-
       const borrowed_inventory = JSON.parse(
-        await fs.readFile(path_file_borrowing, "utf8")
+        await fs.readFile(path_file_borrowing, "utf8"),
       );
-      const found_room_index = await this.find_index_room_borrowed(
+      const found_index = await this.find_index_room_borrowed(
         borrowed_inventory,
-        items_id
-      );
-      const found_facility_index = await this.find_index_facilities_borrowed(
-        borrowed_inventory,
-        items_id
+        borrowed_id,
       );
 
-      if (found_room_index >= 0) {
+      if (found_index >= 0 && type == "room") {
         found_room.status.available = true;
         await fs.writeFile(
           path_file_inventory,
-          JSON.stringify(inventory, null, 2)
+          JSON.stringify(inventory, null, 2),
         );
-        borrowed_inventory.borrowed_list[
-          found_room_index
-        ].item.status.rejected = true;
+        borrowed_inventory.borrowed_list[found_index].item.status.rejected =
+          true;
 
-        delete borrowed_inventory.borrowed_list[found_room_index].item.status
+        delete borrowed_inventory.borrowed_list[found_index].item.status
           .approved;
 
-        borrowed_inventory.borrowed_list[
-          found_room_index
-        ].item.status.pending = false;
+        borrowed_inventory.borrowed_list[found_index].item.status.pending =
+          false;
+
+        Object.assign(borrowed_inventory.borrowed_list[found_index], payload);
 
         await fs.writeFile(
           path_file_borrowing,
-          JSON.stringify(borrowed_inventory, null, 2)
+          JSON.stringify(borrowed_inventory, null, 2),
         );
         return {
           message: `Rejected loan with ID ${items_id} successful`,
         };
       }
 
-      if (found_facility_index >= 0) {
-        borrowed_inventory.borrowed_list[
-          found_facility_index
-        ].item.status.rejected = true;
+      if (found_index >= 0) {
+        borrowed_inventory.borrowed_list[found_index].item.status.rejected =
+          true;
 
-        delete borrowed_inventory.borrowed_list[found_facility_index].item
-          .status.approved;
+        delete borrowed_inventory.borrowed_list[found_index].item.status
+          .approved;
 
-        borrowed_inventory.borrowed_list[
-          found_facility_index
-        ].item.status.pending = false;
+        borrowed_inventory.borrowed_list[found_index].item.status.pending =
+          false;
+        Object.assign(borrowed_inventory.borrowed_list[found_index], payload);
 
         await fs.writeFile(
           path_file_borrowing,
-          JSON.stringify(borrowed_inventory, null, 2)
+          JSON.stringify(borrowed_inventory, null, 2),
         );
         return {
           message: `Rejected loan with ID ${items_id} successful`,
@@ -225,6 +217,7 @@ class Officer {
       }
       throw new Error("room or facility not found");
     } catch (error) {
+      console.log(error);
       throw error;
     }
   }

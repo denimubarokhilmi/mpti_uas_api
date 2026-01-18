@@ -56,7 +56,7 @@ class Admin {
       if (payload?.old_pass.length != 0) {
         const is_same_password = await this.compare_password(
           payload.old_pass,
-          admin.password
+          admin.password,
         );
         if (is_same_password) {
           admin.password = await this.hashed_password(payload.new_pass);
@@ -102,35 +102,49 @@ class Admin {
   }
 
   async updateUser(req, payload) {
-    const id_user = req.user.id;
-    const data = await this.#read(path_file_user);
-    // if (payload.password.length != 0) {
-    //   payload.password = await this.hashed_password(payload.password);
-    // } else delete payload.password;
+    try {
+      const regex = /ADM/;
+      let id_user = "";
+      if (regex.test(req.user.id)) {
+        id_user = payload.id_user;
+      } else id_user = req.user.id;
 
-    const user = data.user.find((u) => u.id_user === id_user);
+      const data = await this.#read(path_file_user);
 
-    if (payload?.old_pass.length != 0) {
-      const is_same_password = await this.compare_password(
-        payload.old_pass,
-        user.password
-      );
-      if (is_same_password) {
-        user.password = await this.hashed_password(payload.new_pass);
-        await this.#write(path_file_user, data);
-        return {
-          message: "Profile is success changed",
-        };
-      } else throw new Error("is not same password");
-    } else delete payload.old_pass;
+      // if (payload.password.length != 0) {
+      //   payload.password = await this.hashed_password(payload.password);
+      // } else delete payload.password;
 
-    if (!user) throw new Error("User tidak ditemukan");
+      const user = data.user.find((u) => u.id_user === id_user);
+      if (payload?.old_pass) {
+        const is_same_password = await this.compare_password(
+          payload.old_pass,
+          user.password,
+        );
+        if (is_same_password) {
+          user.password = await this.hashed_password(payload.new_pass);
+          await this.#write(path_file_user, data);
+          return {
+            message: "Profile is success changed",
+          };
+        } else throw new Error("is not same password");
+      } else delete payload.old_pass;
 
-    Object.assign(user, payload);
-    await this.#write(path_file_user, data);
-    return {
-      message: `User id ${id_user} is updated successfully`,
-    };
+      if (!user) throw new Error("User tidak ditemukan");
+
+      if (payload.password) {
+        payload.password = await this.hashed_password(payload.password);
+      } else delete payload.password;
+
+      Object.assign(user, payload);
+      await this.#write(path_file_user, data);
+      return {
+        message: `User id ${id_user} is updated successfully`,
+      };
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   async deleteUser(payload) {
@@ -164,17 +178,22 @@ class Admin {
   }
 
   async updateOfficer(req, payload) {
-    const id_officer = req.user.id;
+    const regex = /ADM/;
+    let id_officer = "";
+    if (regex.test(req.user.id)) {
+      id_officer = payload.id_officer;
+    } else id_officer = req.user.id;
+
     const data = await this.#read(path_file_officer);
     // if (payload.password.length != 0) {
     //   payload.password = await this.hashed_password(payload.password);
     // } else delete payload.password;
     const officer = data.officer.find((o) => o.id_officer === id_officer);
 
-    if (payload?.old_pass.length != 0) {
+    if (payload?.old_pass) {
       const is_same_password = await this.compare_password(
         payload.old_pass,
-        officer.password
+        officer.password,
       );
       if (is_same_password) {
         officer.password = await this.hashed_password(payload.new_pass);
@@ -186,6 +205,9 @@ class Admin {
     } else delete payload.old_pass;
 
     if (!officer) throw new Error("Officer tidak ditemukan");
+    if (payload.password) {
+      payload.password = await this.hashed_password(payload.password);
+    } else delete payload.password;
 
     Object.assign(officer, payload);
     await this.#write(path_file_officer, data);
@@ -197,7 +219,7 @@ class Admin {
   async deleteOfficer(payload) {
     const data = await this.#read(path_file_officer);
     data.officer = data.officer.filter(
-      (o) => o.id_officer !== payload.id_officer
+      (o) => o.id_officer !== payload.id_officer,
     );
     await this.#write(path_file_officer, data);
     return {
@@ -229,10 +251,14 @@ class Admin {
   async updateRoom(payload) {
     const data = await this.#read(path_file_inventory);
     const id_room = payload.id_room;
+    if (payload.image == null || payload.image.length == 0) {
+      delete payload.image;
+    }
     const room = data.room.find((r) => r.id_room === id_room);
     if (!room) throw new Error("Room tidak ditemukan");
 
     Object.assign(room, payload);
+
     await this.#write(path_file_inventory, data);
     return {
       message: `room id ${payload.id_room} is updated succesfully`,
@@ -269,6 +295,9 @@ class Admin {
   async updateFacility(payload) {
     const data = await this.#read(path_file_inventory);
     const id_facility = payload.id_facility;
+    if (payload.image == null || payload.image.length == 0) {
+      delete payload.image;
+    }
     const facility = data.facility.find((f) => f.id_facility === id_facility);
     if (!facility) throw new Error("Facility tidak ditemukan");
 
@@ -285,7 +314,7 @@ class Admin {
       const id_facility = payload.id_facility;
 
       data.facility = data.facility.filter(
-        (f) => f.id_facility !== payload.id_facility
+        (f) => f.id_facility !== payload.id_facility,
       );
       await this.#write(path_file_inventory, data);
       return {
